@@ -4,7 +4,6 @@ let computerScore = 0;
 
 function getComputerChoice() {
     let result = Math.floor(Math.random()* 3);
-    console.log ('bot: '+result)
     if (result === 1) {
         return 'rock';
     } else if (result === 2) {
@@ -15,19 +14,40 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let userChoice = prompt('Rock, Paper, Scissors').toLowerCase();
-    console.log ('user: '+userChoice)
-    if (userChoice === 'rock') {
-        return 'rock';
-    } else if (userChoice === 'paper') {
-        return 'paper';
+    return prompt('Rock, Paper, Scissors').toLowerCase();
+}
+
+function playRound(computerChoice, humanChoice){
+    const howToWin = {
+        rock: "scissors",
+        paper: "rock",
+        scissors: 'paper'
+    };
+    
+    if (humanChoice === computerChoice) {
+      alert(`It's a tie! \n you picked "${humanChoice}" and your opponent picked "${computerChoice}"`);
+    } else if (howToWin[humanChoice] === computerChoice) {
+        humanScore++
+      alert(`You win! \nYou: ${humanChoice} \nbot: ${computerChoice}`);
     } else {
-        return 'scissors';
+        computerScore++
+      alert(`You Lose! \nYou: ${humanChoice} \nbot: ${computerChoice}`);
     }
 }
 
-function playRound(humanChoice, computerChoice){
-    if (humanChoice === )
+
+function playGame() {
+    while (humanScore != 5 && computerScore != 5) {
+      playRound(getComputerChoice(), getHumanChoice());
+      console.log(`Human: ${humanScore}`);
+      console.log(`Computer: ${computerScore}`);
+    }
+
+    if (humanScore === 5) {
+      alert("Congrats!");
+    } else {
+      alert("You've lost!");
+    }
 }
-getComputerChoice();
-getHumanChoice();
+
+playGame();
