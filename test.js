@@ -7,9 +7,8 @@ let humanScore = 0;
 let computerScore = 0;
 
 document.body.append(humanScoreDisplay, computerScoreDisplay);
-humanScoreDisplay.textContent = "Human :" + humanScore;
-computerScoreDisplay.textContent += "\nComputer" + computerScore;
-
+humanScoreDisplay.textContent = "Human: " + humanScore;
+computerScoreDisplay.textContent += "\nComputer: " + computerScore;
 
 function getComputerChoice() {
   let result = Math.floor(Math.random() * 3);
@@ -21,11 +20,6 @@ function getComputerChoice() {
     return "scissors";
   }
 }
-
-// function getHumanChoice() {
-//     let userInput = prompt('Rock, Paper, Scissors').toLowerCase();
-//         return userInput;
-// }
 
 function playRound(computerChoice, humanChoice) {
   const howToWin = {
@@ -40,18 +34,15 @@ function playRound(computerChoice, humanChoice) {
     );
   } else if (howToWin[humanChoice] === computerChoice) {
     humanScore++;
-    humanScoreDisplay.textContent = 'Human :' +humanScore;
-
-
+    humanScoreDisplay.textContent = 'Human: ' +humanScore;
     alert(`You win! \nYou: ${humanChoice} \nbot: ${computerChoice}`);
   } else {
     computerScore++;
-    computerScoreDisplay.textContent += '\nComputer' +computerScore;
+    computerScoreDisplay.textContent = 'Computer: ' +computerScore;
     alert(`You Lose! \nYou: ${humanChoice} \nbot: ${computerChoice}`);
   }
+  checkWin();
 }
-
-
 
 function selectItem() {
   rockBtn.addEventListener("click", () => {
@@ -67,20 +58,25 @@ function selectItem() {
   });
 }
 
-// function playGame() {
-//   while (humanScore != 5 && computerScore != 5) {
-//     selectItem();
-//     console.log(`Human: ${humanScore}`);
-//     console.log(`Computer: ${computerScore}`);
-//   }
+function checkWin() {
+  let winMsg = "You won the game!\nFinal Score: \nYou: "+humanScore+"\nComputer: "+computerScore;
+  let loseMsg = "You lost against the bot!\nFinal Score: \nComputer: "+computerScore+"\nYou: "+humanScore;
+  if (humanScore === 5) {
+    alert(winMsg);
+    
+    restartGame();
+  } else if (computerScore ===  5) {
+    alert(loseMsg);
+    restartGame();
+  }
+}
 
-//   if (humanScore === 5) {
-//     alert("Congrats!");
-//   } else {
-//     alert("You've lost!");
-//   }
-// }
-// playGame();
+
+function restartGame() {
+  humanScore = 0;
+  computerScore = 0;
+  humanScoreDisplay.textContent = "Human: " + humanScore;
+  computerScoreDisplay.textContent = "Computer: " + computerScore;
+}
+
 selectItem()
-
-
